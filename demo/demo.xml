@@ -1,8 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
+
+        <!-- Pegawai -->
+        <record id='hrpm_pegawai1' model='hrpm.pegawai'>
+            <field name='name' type='char'>Pegawai 1</field>
+            <field name='role' type='char'>runner</field>
+            <field name='rate_gaji'>100000</field>
+        </record>
+        <record id='hrpm_pegawai2' model='hrpm.pegawai'>
+            <field name='name' type='char'>Pegawai 2</field>
+            <field name='role' type='char'>runner</field>
+            <field name='rate_gaji'>100000</field>
+        </record>
+        <record id='hrpm_pegawai3' model='hrpm.pegawai'>
+            <field name='name' type='char'>Pegawai 3</field>
+            <field name='role' type='char'>server</field>
+            <field name='rate_gaji'>100000</field>
+        </record>
+        <record id='hrpm_pegawai4' model='hrpm.pegawai'>
+            <field name='name' type='char'>Pegawai 4</field>
+            <field name='role' type='char'>server</field>
+            <field name='rate_gaji'>100000</field>
+        </record>
+        <record id='hrpm_pegawai5' model='hrpm.pegawai'>
+            <field name='name' type='char'>Pegawai 5</field>
+            <field name='role' type='char'>kitchen</field>
+            <field name='rate_gaji'>100000</field>
+        </record>
+        <record id='hrpm_pegawai6' model='hrpm.pegawai'>
+            <field name='name' type='char'>Pegawai 6</field>
+            <field name='role' type='char'>kitchen</field>
+            <field name='rate_gaji'>100000</field>
+        </record>
+
+        <!-- Sesi -->
+        <record id='hrpm_shift1' model='hrpm.shift'>
+            <field name='sesi' type='char'>pagi</field>
+            <field name='tanggal'>2022-11-22</field>
+            <field name='status' type='char'>terpenuhi</field>
+        </record>
+        <record id='hrpm_shift2' model='hrpm.shift'>
+            <field name='sesi'>sore</field>
+            <field name='tanggal'>2022-11-22</field>
+            <field name='status' type='char'>belum</field>
+        </record>
+        <record id='hrpm_shift3' model='hrpm.shift'>
+            <field name='sesi' type='char'>pagi</field>
+            <field name='tanggal'>2022-11-23</field>
+            <field name='status' type='char'>terpenuhi</field>
+        </record>
+        <record id='hrpm_shift4' model='hrpm.shift'>
+            <field name='sesi'>sore</field>
+            <field name='tanggal'>2022-11-23</field>
+            <field name='status' type='char'>belum</field>
+        </record>
         
-        <!-- Jenis -->
+        <!-- Jenis
         <record id='cats_cat_type1' model='cats.cat.type'>
             <field name='name' type='char'>Persian</field>
         </record>
@@ -11,9 +65,9 @@
         </record>
         <record id='cats_cat_type3' model='cats.cat.type'>
             <field name='name' type='char'>British Shorthair</field>
-        </record>
+        </record> -->
         
-        <!-- Kucing -->
+        <!-- Kucing
         <record id='cats_cat1' model='cats.cat'>
             <field name='name' type='char'>Kucing 1</field>
             <field name='color' type='char'>0</field>
@@ -38,7 +92,7 @@
             <field name='name' type='char'>Kucing 5</field>
             <field name='color' type='char'>4</field>
             <field name='type' ref='cats_cat_type3'/>
-        </record>
+        </record> -->
 
     </data>
 </odoo>

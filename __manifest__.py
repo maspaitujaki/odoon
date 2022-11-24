@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Cats",
+    'name': "HR Planner and Manager",
     'summary': 'Module Odoo untuk menyimpan data kucing.',
     'description': 'Module Odoo untuk menyimpan dan menampilkan data kucing yang ada pada WillyWangky’s Pet Shop.',
     'sequence': -100,
@@ -10,12 +10,13 @@
     'depends': ['base'],
     'data': [
         'security/ir.model.access.csv',
-        'views/cats_menus.xml',
-        'views/cats_trees.xml',
-        'views/cats_forms.xml',
+        'views/hrpm_menus.xml',
+        'views/hrpm_trees.xml',
+        'views/hrpm_forms.xml',
+        'views/hrpm_calendar.xml',
     ],
     'demo': [
-        'demo/demo.xml',
+        'demo/demo.xml'
     ],
     'qweb': [
 

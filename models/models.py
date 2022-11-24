@@ -1,26 +1,82 @@
 # -*- coding: utf-8 -*-
+from datetime import timedelta, datetime, date
 
-from odoo import models, fields, api
-
-
-class Cat(models.Model):
-    _name = 'cats.cat'
-    _description = 'Deskripsi Kucing'
+from odoo import models, fields
+from odoo.exceptions import UserError, AccessError, ValidationError
 
 
-    name = fields.Char(string="Nama", required=True)
-    color = fields.Selection(selection=[
-        ('0', 'Merah'), ('1', 'Kuning'), ('2', 'Hijau'), ('3', 'Biru'), ('4', 'Ungu'), 
-    ], string="Warna", required=True)
-    type = fields.Many2one('cats.cat.type', string="Jenis")
-
-
-class CatType(models.Model):
-    _name = 'cats.cat.type'
-    _description = 'Jenis Kucing'
+class Pegawai(models.Model):
+    _name = 'hrpm.pegawai'
+    _description = 'Pegawai'
 
 
     name = fields.Char(string="Nama")
+    rate_gaji = fields.Integer(string='Rate Gaji (/jam)', required=True)
+    role = fields.Selection([('runner', 'Runner'), ('server', 'Server'), ('kitchen','Kitchen'), ('rm', 'Restaurant Manager'), ('arm','Asisstant Restaurant Manager'), ('captain', 'Captain'), ('spv', 'Supervisor')], string='Role', required=True)
+
+class Shift(models.Model):
+    _name = 'hrpm.shift'
+    _description = 'Shift'
+    _rec_name = 'sesi'
+
+    
+
+    sesi = fields.Selection([('pagi', 'Pagi'), ('sore', 'Sore')], string='Sesi Shift', required=True)
+    tanggal = fields.Date(string="Tanggal", required=True)
+    kebutuhan = fields.Many2many('hrpm.kebutuhan',string='Kebutuhan')
+    pengisi = fields.Many2many('hrpm.pegawai',string='Pengisi')
+    status = fields.Selection([('terpenuhi', 'Terpenuhi'), ('belum', 'Belum Terpenuhi')], string='Status',default='belum', readonly=True)
+    is_duplicate = fields.Boolean(string='Duplicate?', default=False)
+    tanggal_akhir = fields.Date(string="Sampai")
+
+    def generate_duplicate(self):
+        for rec in self:
+            if rec.is_duplicate:
+                if rec.tanggal and rec.tanggal_akhir:
+                    range_date = rec.calc_dates(
+                        rec.tanggal, rec.tanggal_akhir)
+                    if range_date is None:
+                        raise ValidationError("Something went wrong")
+                    else:
+                        for day in range_date:
+                            val = {
+                                'sesi': rec.sesi,
+                                'tanggal': day,
+                                'tanggal_akhir': rec.tanggal_akhir,
+                                'kebutuhan': [(6, 0, rec.kebutuhan.ids)],
+                                'pengisi': [(6, 0, rec.pengisi.ids)],
+                                'status': rec.status,
+                                'is_duplicate': True
+        }
+                            self.create(val)
+                            self._cr.commit()
+
+    def calc_dates(self, date1, date2):
+        date_from = date1
+        date_to = date2
+
+        delta = date_to - date_from
+
+        if delta.days < 0:
+            return None
+
+        dates = []
+
+        for n in range(delta.days + 1):
+            dates.append(date_from + timedelta(days=n))
+
+        return dates 
+
+
+class Kebutuhan(models.Model):
+    _name = 'hrpm.kebutuhan'
+    _description = 'Kebutuhan'
+
+
+    role = fields.Selection([('runner', 'Runner'), ('server', 'Server'), ('kitchen','Kitchen'), ('rm', 'Restaurant Manager'), ('arm','Asisstant Restaurant Manager'), ('captain', 'Captain'), ('spv', 'Supervisor')], string='Role', required=True)
+    jumlah = fields.Integer(string="Jumlah", required=True)
+
+    
 
 
 

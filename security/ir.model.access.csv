@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-cats_cat_manager,Cats Cat Manager,model_cats_cat,,1,1,1,1
-cats_cat_type_manager,Cats Cat Type Manager,model_cats_cat_type,,1,1,1,1
+hrpm_pegawai_manager,HRPM Pegawai Manager,model_hrpm_pegawai,,1,1,1,1
+hrpm_shift_manager,HRPM Shift Manager,model_hrpm_shift,,1,1,1,1
+hrpm_kebutuhan_manager,HRPM Kebutuhan Manager,model_hrpm_kebutuhan,,1,1,1,1

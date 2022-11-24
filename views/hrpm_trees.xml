@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <record model="ir.ui.view" id="hrpm_pegawai_tree">
+    <field name="name">hrpm.pegawai.tree</field>
+    <field name="model">hrpm.pegawai</field>
+    <field name="priority" eval="1"/>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="role"/>
+        <field name="rate_gaji"/>
+      </tree>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="hrpm_shift_tree">
+    <field name="name">hrpm.shift.tree</field>
+    <field name="model">hrpm.shift</field>
+    <field name="priority" eval="1"/>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="tanggal"/>
+        <field name="sesi"/>
+        <field name="status"/>
+      </tree>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="hrpm_kebutuhan_tree">
+    <field name="name">hrpm.kebutuhan.tree</field>
+    <field name="model">hrpm.kebutuhan</field>
+    <field name="priority" eval="1"/>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="role"/>
+        <field name="jumlah"/>
+      </tree>
+    </field>
+  </record>
+  
+</odoo>

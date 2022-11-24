@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <record model="ir.ui.view" id="hrpm_pegawai_form">
+    <field name="name">hrpm.pegawai.form</field>
+    <field name="model">hrpm.pegawai</field>
+    <field name="priority" eval="1"/>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="role"/>
+            <field name="rate_gaji"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="hrpm_shift_form">
+    <field name="name">hrpm.shift.form</field>
+    <field name="model">hrpm.shift</field>
+    <field name="priority" eval="1"/>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <field name="tanggal"/>
+            <field name="sesi"/>
+            <field name="kebutuhan" widget="many2many">
+              <tree>
+                <field name="role"/>
+                <field name="jumlah"/>
+              </tree>
+            </field>
+            <field name="pengisi" widget="many2many">
+              <tree>
+                <field name="name"/>
+                <field name="role"/>
+              </tree>
+            </field>
+            <field name="status"/>
+            <field name="is_duplicate"/>
+            <field name="tanggal_akhir" attrs="{'invisible': [('is_duplicate','=',False)]}"/>
+            <button name="generate_duplicate" string="Generate Duplicate" class="btn-primary" type="object" attrs="{'invisible': ['|',('is_duplicate','=',False), ('tanggal_akhir','=',False)]}" />
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  
+</odoo>

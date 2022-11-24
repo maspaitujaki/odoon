@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="hrpm_shift_calendar">
+        <field name="name">hrpm.shift.calendar</field>
+        <field name="model">hrpm.shift</field>
+        <field name="arch" type="xml">
+            <calendar string="Shift" date_start="tanggal" color="status" mode="month">
+                <field name="tanggal"/>
+                <field name="sesi"/>
+            </calendar>
+        </field>
+    </record>
+</odoo>
