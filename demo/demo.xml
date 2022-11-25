@@ -38,22 +38,18 @@
         <record id='hrpm_shift1' model='hrpm.shift'>
             <field name='sesi' type='char'>pagi</field>
             <field name='tanggal'>2022-11-22</field>
-            <field name='status' type='char'>terpenuhi</field>
         </record>
         <record id='hrpm_shift2' model='hrpm.shift'>
             <field name='sesi'>sore</field>
             <field name='tanggal'>2022-11-22</field>
-            <field name='status' type='char'>belum</field>
         </record>
         <record id='hrpm_shift3' model='hrpm.shift'>
             <field name='sesi' type='char'>pagi</field>
             <field name='tanggal'>2022-11-23</field>
-            <field name='status' type='char'>terpenuhi</field>
         </record>
         <record id='hrpm_shift4' model='hrpm.shift'>
             <field name='sesi'>sore</field>
             <field name='tanggal'>2022-11-23</field>
-            <field name='status' type='char'>belum</field>
         </record>
         
         <!-- Jenis

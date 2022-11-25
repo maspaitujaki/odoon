@@ -22,6 +22,8 @@
         <field name="tanggal"/>
         <field name="sesi"/>
         <field name="status"/>
+        <!-- <field name="test_counter"/> -->
+        <!-- <button name="update_status" string="Update Status" class="btn-primary" type="object" /> -->
       </tree>
     </field>
   </record>

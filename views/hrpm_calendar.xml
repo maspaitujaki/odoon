@@ -7,6 +7,7 @@
             <calendar string="Shift" date_start="tanggal" color="status" mode="month">
                 <field name="tanggal"/>
                 <field name="sesi"/>
+                <field name="status"/>
             </calendar>
         </field>
     </record>

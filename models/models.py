@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import timedelta, datetime, date
 
-from odoo import models, fields
+from odoo import models, fields, api
 from odoo.exceptions import UserError, AccessError, ValidationError
 
 
@@ -19,15 +19,18 @@ class Shift(models.Model):
     _description = 'Shift'
     _rec_name = 'sesi'
 
-    
 
     sesi = fields.Selection([('pagi', 'Pagi'), ('sore', 'Sore')], string='Sesi Shift', required=True)
     tanggal = fields.Date(string="Tanggal", required=True)
     kebutuhan = fields.Many2many('hrpm.kebutuhan',string='Kebutuhan')
     pengisi = fields.Many2many('hrpm.pegawai',string='Pengisi')
-    status = fields.Selection([('terpenuhi', 'Terpenuhi'), ('belum', 'Belum Terpenuhi')], string='Status',default='belum', readonly=True)
+    status = fields.Selection([('terpenuhi', 'Terpenuhi'), ('belum', 'Belum Terpenuhi')], string='Status',default='belum')
     is_duplicate = fields.Boolean(string='Duplicate?', default=False)
     tanggal_akhir = fields.Date(string="Sampai")
+
+    @api.onchange('pengisi','kebutuhan')	
+    def _status_control(self):
+        self.write({'status': self.update_status()})
 
     def generate_duplicate(self):
         for rec in self:
@@ -66,6 +69,28 @@ class Shift(models.Model):
             dates.append(date_from + timedelta(days=n))
 
         return dates 
+    
+    def update_status(self):
+        for rec in self:
+            list_kebutuhan = {}
+            for kebutuhan in rec.kebutuhan:
+                role = kebutuhan.role
+                jumlah = kebutuhan.jumlah
+                if not role in list_kebutuhan.keys():
+                    list_kebutuhan[role] = 0
+                list_kebutuhan[role] += jumlah
+
+            for pengisi in rec.pengisi:
+                role = pengisi.role
+                if role in list_kebutuhan.keys():
+                    list_kebutuhan[role] -= 1
+
+            status = 'terpenuhi'
+            for key, value in list_kebutuhan.items():
+                if value != 0:
+                    status = 'belum'
+                    break
+            return status
 
 
 class Kebutuhan(models.Model):
