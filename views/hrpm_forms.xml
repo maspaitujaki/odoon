@@ -39,7 +39,7 @@
                 <field name="role"/>
               </tree>
             </field>
-            <field name="status" readonly="1"/>
+            <field name="status" />
             <field name="is_duplicate"/>
             <field name="tanggal_akhir" attrs="{'invisible': [('is_duplicate','=',False)]}"/>
             <button name="generate_duplicate" string="Generate Duplicate" class="btn-primary" type="object" attrs="{'invisible': ['|',('is_duplicate','=',False), ('tanggal_akhir','=',False)]}" />
