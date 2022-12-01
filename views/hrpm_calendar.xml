@@ -8,6 +8,7 @@
                 <field name="tanggal"/>
                 <field name="sesi"/>
                 <field name="status"/>
+                <field name="estimasi"/>
             </calendar>
         </field>
     </record>

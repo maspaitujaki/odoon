@@ -10,7 +10,7 @@ class Pegawai(models.Model):
     _description = 'Pegawai'
 
 
-    name = fields.Char(string="Nama")
+    name = fields.Char(string="Nama", required=True)
     rate_gaji = fields.Integer(string='Rate Gaji (/jam)', required=True)
     role = fields.Selection([('runner', 'Runner'), ('server', 'Server'), ('kitchen','Kitchen'), ('rm', 'Restaurant Manager'), ('arm','Asisstant Restaurant Manager'), ('captain', 'Captain'), ('spv', 'Supervisor')], string='Role', required=True)
 
@@ -27,6 +27,14 @@ class Shift(models.Model):
     status = fields.Selection([('terpenuhi', 'Terpenuhi'), ('belum', 'Belum Terpenuhi')], string='Status',default='belum')
     is_duplicate = fields.Boolean(string='Duplicate?', default=False)
     tanggal_akhir = fields.Date(string="Sampai")
+    estimasi = fields.Integer(string='Estimasi Cost', default=0, compute='_compute_estimasi')
+
+    def _compute_estimasi(self):
+        for rec in self:
+            total = 0
+            for pengisi in rec.pengisi:
+                total += pengisi.rate_gaji * 8
+            rec.estimasi = total
 
     @api.onchange('pengisi','kebutuhan')	
     def _status_control(self):
